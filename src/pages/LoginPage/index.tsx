@@ -1,9 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/shared/lib/hook/useAuth.tsx';
 import styles from './styles.module.scss';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
+import { TextInput, PasswordInput } from '@/shared/atoms';
+import { useForm } from '@/shared/lib/hook';
 
-function Index() {
+const LoginPage = () => {
+  const { formValues, formErrors, handleChange, validate } = useForm({
+    email: '',
+    password: '',
+  });
+
   const navigate = useNavigate();
   const location = useLocation();
   const { signIn } = useAuth();
@@ -11,11 +18,14 @@ function Index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
-    // TODO: Добавить логику проверки формы
+
+    if (!validate()) {
+      return;
+    }
+
     const user = {
-      email: form.email.value,
-      password: form.password.value,
+      email: formValues.email,
+      password: formValues.password,
     };
 
     signIn(user, () => navigate(fromPage, { replace: true }));
@@ -25,20 +35,21 @@ function Index() {
     <div className={styles.formWrapper}>
       <h1 className={styles.heading}>Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <TextField
-          className={styles.textFieldEmail}
-          label="Email address"
-          variant="outlined"
-          size="medium"
-          id="email"
+        <TextInput
+          label="Email"
+          name="email"
+          value={formValues.email}
+          error={formErrors.email}
+          helperText={formErrors.email}
+          onChange={handleChange}
         />
-        <TextField
-          className={styles.textFieldPass}
+        <PasswordInput
           label="Password"
-          variant="outlined"
-          size="medium"
-          type="password"
-          id="password"
+          name="password"
+          value={formValues.password}
+          error={formErrors.password}
+          helperText={formErrors.password}
+          onChange={handleChange}
         />
         <div className={styles.buttonWrapper}>
           <Button
@@ -50,14 +61,19 @@ function Index() {
           >
             Login
           </Button>
-          {/* TODO: Добавить логику выхода из формы */}
-          <Button className={styles.buttonExit} variant="contained" color="error" size="large">
+          <Button
+            className={styles.buttonExit}
+            variant="contained"
+            color="error"
+            size="large"
+            onClick={() => navigate('/')}
+          >
             Exit
           </Button>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default Index;
+export default LoginPage;

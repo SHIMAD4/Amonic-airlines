@@ -15,13 +15,12 @@
   border-radius: 10px;
   box-shadow: $main-shadow;
 
-  padding: 95px 142px;
+  padding: 95px 145px;
 }
 
 .heading {
   font-size: 50px;
-  font-family: "Roboto Mono", sans-serif;
-  margin-bottom: 48px;
+  margin-bottom: 50px;
 }
 
 .form {
@@ -30,19 +29,6 @@
   align-items: center;
   flex-direction: column;
   width: 465px;
-
-  .textFieldEmail,
-  .textFieldPass {
-    width: 100%;
-  }
-
-  .textFieldEmail {
-    margin-bottom: 16px;
-  }
-
-  .textFieldPass {
-    margin-bottom: 32px;
-  }
 
   .buttonWrapper {
     width: 100%;
