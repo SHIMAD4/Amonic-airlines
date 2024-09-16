@@ -1,0 +1,59 @@
+@import "@/shared/styles/colors";
+@import "@/shared/styles/variables";
+
+.formWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 10px;
+  box-shadow: $main-shadow;
+
+  padding: 95px 142px;
+}
+
+.heading {
+  font-size: 50px;
+  font-family: "Roboto Mono", sans-serif;
+  margin-bottom: 48px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 465px;
+
+  .textFieldEmail,
+  .textFieldPass {
+    width: 100%;
+  }
+
+  .textFieldEmail {
+    margin-bottom: 16px;
+  }
+
+  .textFieldPass {
+    margin-bottom: 32px;
+  }
+
+  .buttonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 100px;
+
+    .buttonLogin, .buttonExit {
+      width: 100%
+    }
+  }
+}

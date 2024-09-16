@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LoginPage from '@/pages/LoginPage.tsx';
+import Index from '@/pages/LoginPage';
 import { MainLayout } from '@/widgets/layouts';
 import HomePage from '@/pages/HomePage.tsx';
 import { RequireAuth } from '@/shared/lib/hoc/RequireAuth.tsx';
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/home" replace />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<Index />} />
           <Route
             path="/home"
             element={
