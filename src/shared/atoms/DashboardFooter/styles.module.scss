@@ -1,0 +1,13 @@
+@import "../../styles/colors";
+
+.footer {
+  display: flex;
+  gap: 8px;
+
+  .button {
+    padding: 4px 24px;
+
+    color: $accent-button-color;
+    border-color: $accent-button-color;
+  }
+}

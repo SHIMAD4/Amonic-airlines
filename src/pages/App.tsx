@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from '@/pages/LoginPage';
-import HomePage from '@/pages/HomePage.tsx';
+import HomePage from '@/pages/HomePage';
 import { MainLayout } from '@/widgets/layouts';
 import { RequireAuth } from '@/shared/lib/hoc/RequireAuth.tsx';
 import { AuthProvider } from '@/shared/lib/hoc/AuthProvider.tsx';
