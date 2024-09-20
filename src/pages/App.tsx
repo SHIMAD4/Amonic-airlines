@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from '@/pages/LoginPage';
 import HomePage from '@/pages/HomePage';
+import AddUserPage from '@/pages/AddUserPage';
 import { MainLayout } from '@/widgets/layouts';
 import { RequireAuth } from '@/shared/lib/hoc/RequireAuth.tsx';
 import { AuthProvider } from '@/shared/lib/hoc/AuthProvider.tsx';
@@ -17,6 +18,14 @@ function App() {
             element={
               <RequireAuth>
                 <HomePage />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/home/addUser"
+            element={
+              <RequireAuth>
+                <AddUserPage />
               </RequireAuth>
             }
           />
