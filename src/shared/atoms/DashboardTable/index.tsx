@@ -30,6 +30,7 @@ const rows = [
   createData(4, 'avatar', 'James', 'Thumbiko', 55, 'office user', 'name@email.com', 'Cell'),
 ];
 
+// TODO: Добавить цвет для строк по опциям
 export const DashboardTable = () => {
   return (
     <div className={styles.tableWrapper}>

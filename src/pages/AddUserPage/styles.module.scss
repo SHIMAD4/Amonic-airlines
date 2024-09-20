@@ -15,7 +15,7 @@
   border-radius: 10px;
   box-shadow: $main-shadow;
 
-  padding: 95px 145px;
+  padding: 25px 145px;
 }
 
 .heading {
@@ -30,17 +30,26 @@
   flex-direction: column;
   width: 465px;
 
-  .inputWrapper {
-    width: 100%;
-  }
-
-  .login {
+  .labelWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin-bottom: 16px;
+
+    .label {
+      width: 35%;
+    }
   }
 
-  .password {
+  .labelWrapperPassword {
     margin-bottom: 32px;
+  }
+
+  .select,
+  .date {
+    width: 100%;
+    margin-bottom: 16px;
   }
 
   .buttonWrapper {

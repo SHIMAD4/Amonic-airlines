@@ -2,8 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/shared/lib/hook/useAuth.tsx';
 import styles from './styles.module.scss';
 import { Button } from '@mui/material';
-import { TextInput, PasswordInput } from '@/shared/atoms';
 import { useForm } from '@/shared/lib/hook';
+import { Input } from '@/shared/molecules';
 
 const LoginPage = () => {
   const { formValues, formErrors, handleChange, validate } = useForm({
@@ -35,20 +35,26 @@ const LoginPage = () => {
     <div className={styles.formWrapper}>
       <h1 className={styles.heading}>Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <TextInput
-          label="Email"
+        <Input
+          variant="TextInput"
+          fieldLabelText="Email"
           name="email"
           value={formValues.email}
           error={formErrors.email}
           helperText={formErrors.email}
+          className={styles.login}
+          wrapperClassName={styles.inputWrapper}
           onChange={handleChange}
         />
-        <PasswordInput
-          label="Password"
+        <Input
+          variant="PasswordInput"
+          fieldLabelText="Password"
           name="password"
           value={formValues.password}
           error={formErrors.password}
           helperText={formErrors.password}
+          className={styles.password}
+          wrapperClassName={styles.inputWrapper}
           onChange={handleChange}
         />
         <div className={styles.buttonWrapper}>

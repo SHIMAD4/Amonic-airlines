@@ -1,9 +1,9 @@
-import Dashboard from '../../features/Dashboard';
+import AdminDashboard from '@/features/AdminDashboard';
 
 function HomePage() {
   return (
     <>
-      <Dashboard />
+      <AdminDashboard />
     </>
   );
 }

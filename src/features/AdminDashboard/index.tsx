@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 import { DashboardHeader, DashboardFooter } from '@/shared/atoms';
 import { DashboardBody } from '@/shared/molecules';
 
-function Dashboard() {
+function AdminDashboard() {
   return (
     <div className={styles.wrapper}>
       <DashboardHeader />
@@ -12,4 +12,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default AdminDashboard;
