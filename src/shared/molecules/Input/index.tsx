@@ -1,4 +1,12 @@
-import { FormLabel, MenuItem, Select, TextField } from '@mui/material';
+import {
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+} from '@mui/material';
 import { useState } from 'react';
 import {
   IconButton,
@@ -20,6 +28,8 @@ export const Input = ({ variant = 'TextInput', ...rest }) => {
       return <DateInput {...rest} />;
     case 'SelectInput':
       return <SelectInput {...rest} />;
+    case 'RadioInput':
+      return <RadioInput {...rest} />;
     default:
       return <TextInput {...rest} />;
   }
@@ -127,5 +137,33 @@ const SelectInput = ({ name, value, fieldLabelText, onChange, arrOfItems, ...res
         ))}
       </Select>
     </FormControl>
+  </InputWrapper>
+);
+
+const RadioInput = ({
+  name,
+  value,
+  fieldLabelText,
+  labelClassName,
+  radioGroupClassName,
+  onChange,
+  arrOfItems,
+  ...rest
+}) => (
+  <InputWrapper {...rest}>
+    <InputLabel className={labelClassName} id={name}>
+      {fieldLabelText}
+    </InputLabel>
+    <RadioGroup
+      className={radioGroupClassName}
+      aria-labelledby={name}
+      name={name}
+      defaultChecked={value}
+      onChange={onChange}
+    >
+      {arrOfItems.map((item) => (
+        <FormControlLabel key={item.id} value={item.value} label={item.label} control={<Radio />} />
+      ))}
+    </RadioGroup>
   </InputWrapper>
 );

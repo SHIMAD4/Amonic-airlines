@@ -23,6 +23,7 @@ export const AttributeSelect = () => {
         >
           <MenuItem value={10}>All offices</MenuItem>
           <MenuItem value={20}>Cell</MenuItem>
+          <MenuItem value={30}>Alabama</MenuItem>
         </Select>
       </FormControl>
     </div>

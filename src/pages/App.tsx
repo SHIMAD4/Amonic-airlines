@@ -5,6 +5,7 @@ import AddUserPage from '@/pages/AddUserPage';
 import { MainLayout } from '@/widgets/layouts';
 import { RequireAuth } from '@/shared/lib/hoc/RequireAuth.tsx';
 import { AuthProvider } from '@/shared/lib/hoc/AuthProvider.tsx';
+import EditUserPage from '@/pages/EditUserPage';
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
             element={
               <RequireAuth>
                 <AddUserPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home/editUser"
+            element={
+              <RequireAuth>
+                <EditUserPage />
               </RequireAuth>
             }
           />

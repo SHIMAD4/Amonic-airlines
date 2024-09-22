@@ -1,0 +1,66 @@
+@import "@/shared/styles/colors";
+@import "@/shared/styles/variables";
+
+.formWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 10px;
+  box-shadow: $main-shadow;
+
+  padding: 25px 145px;
+}
+
+.heading {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 465px;
+
+  .labelWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+
+    .label {
+      width: 35%;
+    }
+
+    .radioGroup {
+      width: 100%;
+    }
+  }
+
+  .select {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .buttonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 100px;
+
+    .buttonApply, .buttonCancel {
+      width: 100%
+    }
+  }
+}

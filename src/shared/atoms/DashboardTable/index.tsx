@@ -9,25 +9,48 @@ import {
 } from '@mui/material';
 import styles from './styles.module.scss';
 
-function createData(
-  id: number,
-  avatar: string,
-  name: string,
-  lastname: string,
-  age: number,
-  role: string,
-  email: string,
-  office: string,
-) {
-  return { id, avatar, name, lastname, age, role, email, office };
-}
-
 // TODO: MOCK DATA убрать
 const rows = [
-  createData(1, 'avatar', 'Prabodhan', 'Fitzgerald', 33, 'Administator', 'name@email.com', 'Cell'),
-  createData(2, 'avatar', 'Jefferson', 'Lloyd', 44, 'Administator', 'name@email.com', 'Cell'),
-  createData(3, 'avatar', 'Mayo', 'Ceiran', 29, 'office user', 'name@email.com', 'Cell'),
-  createData(4, 'avatar', 'James', 'Thumbiko', 55, 'office user', 'name@email.com', 'Cell'),
+  {
+    id: 1,
+    avatar: 'avatar',
+    name: 'Prabodhan',
+    lastname: 'Fitzgerald',
+    age: 33,
+    role: 'Administator',
+    email: 'name@email.com',
+    office: 'Cell',
+  },
+  {
+    id: 2,
+    avatar: 'avatar',
+    name: 'Jefferson',
+    lastname: 'Lloyd',
+    age: 44,
+    role: 'Administator',
+    email: 'name@email.com',
+    office: 'Cell',
+  },
+  {
+    id: 3,
+    avatar: 'avatar',
+    name: 'Mayo',
+    lastname: 'Ceiran',
+    age: 29,
+    role: 'office user',
+    email: 'name@email.com',
+    office: 'Cell',
+  },
+  {
+    id: 4,
+    avatar: 'avatar',
+    name: 'James',
+    lastname: 'Thumbiko',
+    age: 55,
+    role: 'office user',
+    email: 'name@email.com',
+    office: 'Cell',
+  },
 ];
 
 // TODO: Добавить цвет для строк по опциям
@@ -49,7 +72,7 @@ export const DashboardTable = () => {
           <TableBody>
             {/* TODO: Добавить подсветку строк */}
             {rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} onClick={() => console.log(row.id)}>
                 <TableCell>
                   <p>{row.avatar}</p>
                   {row.name}
