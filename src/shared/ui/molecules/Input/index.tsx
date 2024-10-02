@@ -131,8 +131,8 @@ const SelectInput = ({ name, value, fieldLabelText, onChange, arrOfItems, ...res
       <InputLabel id={name}>{fieldLabelText}</InputLabel>
       <Select labelId={name} name={name} value={value} onChange={onChange} label={fieldLabelText}>
         {arrOfItems.map((item) => (
-          <MenuItem key={item.id} value={item.value} disabled={item.id === 0}>
-            {item.value}
+          <MenuItem key={item.id} value={item.title}>
+            {item.title}
           </MenuItem>
         ))}
       </Select>

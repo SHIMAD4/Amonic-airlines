@@ -1,1 +1,1 @@
-export { UserType } from './user.tsx';
+export { UserType, OfficeType } from './user.tsx';

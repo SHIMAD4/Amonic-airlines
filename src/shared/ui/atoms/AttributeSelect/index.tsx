@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styles from './styles.module.scss';
+import { API } from '@/shared/api';
+import { OfficeType } from '@/shared/types';
 
 export const AttributeSelect = () => {
-  const [value, setValue] = useState(10);
+  const [offices, setOffices] = useState<OfficeType[]>([]);
+  const [value, setValue] = useState('All');
 
   // TODO: Добавить логику сортировки таблицы
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    API.userBlock.getOffices().then(({ data }) => setOffices(data));
+  }, []);
 
   return (
     <div className={styles.select}>
@@ -21,12 +28,10 @@ export const AttributeSelect = () => {
           label="Attribute"
           onChange={handleChange}
         >
-          <MenuItem value={10}>All offices</MenuItem>
-          <MenuItem value="Abu dhabi">Abu dhabi</MenuItem>
-          <MenuItem value="Bahrain">Bahrain</MenuItem>
-          <MenuItem value="Cairo">Cairo</MenuItem>
-          <MenuItem value="Doha">Doha</MenuItem>
-          <MenuItem value="Riyadh">Riyadh</MenuItem>
+          <MenuItem value="All">All offices</MenuItem>
+          {offices.map((office) => (
+            <MenuItem value={office.title}>{office.title}</MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>

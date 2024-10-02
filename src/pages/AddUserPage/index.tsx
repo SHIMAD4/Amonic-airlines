@@ -2,17 +2,19 @@ import { useForm } from '@/shared/lib/hook';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import styles from './styles.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { Input } from '@/shared/ui/molecules';
 import clsx from 'clsx';
 import { API } from '@/shared/api';
 import { getFormattedISODate } from '@/shared/lib/utils';
+import { OfficeType } from '@/shared/types';
 
-// TODO: Привязать данные с запроса на получение офисов
+// TODO: Исправить рендер новых пользователей в таблице (Может быть добавить Redux Toolkit)
 function AddUserPage() {
   const navigate = useNavigate();
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState('');
+  const [offices, setOffices] = useState<OfficeType[]>([]);
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs(getFormattedISODate(new Date())));
   const { formValues, formErrors, handleChange } = useForm({
     email: '',
@@ -27,16 +29,13 @@ function AddUserPage() {
     setValue(event.target.value);
     handleChange({ target: { name: 'office', value: event.target.value } });
   };
-
   const handleDateChange = (newValue) => {
     setDateValue(newValue);
     handleChange({ target: { name: 'birthdate', value: getFormattedISODate(newValue) } });
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    API.tableBlock.addUser({
+    API.userBlock.addUser({
       email: formValues.email,
       first_name: formValues.firstname,
       last_name: formValues.lastname,
@@ -46,8 +45,12 @@ function AddUserPage() {
       active: true,
     });
 
-    navigate('/home', { replace: true });
+    navigate('/home');
   };
+
+  useEffect(() => {
+    API.userBlock.getOffices().then(({ data }) => setOffices(data));
+  }, []);
 
   return (
     <div className={styles.formWrapper}>
@@ -99,13 +102,7 @@ function AddUserPage() {
           value={value}
           onChange={handleChangeSelect}
           required={true}
-          arrOfItems={[
-            { id: 1, value: 'Abu dhabi' },
-            { id: 2, value: 'Bahrain' },
-            { id: 3, value: 'Cairo' },
-            { id: 4, value: 'Doha' },
-            { id: 5, value: 'Riyadh' },
-          ]}
+          arrOfItems={offices}
         />
         <Input
           variant="DateInput"

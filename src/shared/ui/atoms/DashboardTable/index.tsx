@@ -20,7 +20,7 @@ export const DashboardTable = () => {
   const [users, setUsers] = useState<UserType[]>([]);
 
   useEffect(() => {
-    API.tableBlock.getUsers().then(({ data }) => setUsers(data));
+    API.userBlock.getUsers().then(({ data }) => setUsers(data));
   }, []);
 
   return (
