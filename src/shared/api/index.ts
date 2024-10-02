@@ -12,6 +12,11 @@ const authBlock = {
     }),
 };
 
+const tableBlock = {
+  getUsers: () => ApiInstance.get('/user'),
+};
+
 export const API = {
   authBlock,
+  tableBlock,
 };

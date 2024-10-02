@@ -8,80 +8,48 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from './styles.module.scss';
-
-// TODO: MOCK DATA убрать
-const rows = [
-  {
-    id: 1,
-    avatar: 'avatar',
-    name: 'Prabodhan',
-    lastname: 'Fitzgerald',
-    age: 33,
-    role: 'Administator',
-    email: 'name@email.com',
-    office: 'Cell',
-  },
-  {
-    id: 2,
-    avatar: 'avatar',
-    name: 'Jefferson',
-    lastname: 'Lloyd',
-    age: 44,
-    role: 'Administator',
-    email: 'name@email.com',
-    office: 'Cell',
-  },
-  {
-    id: 3,
-    avatar: 'avatar',
-    name: 'Mayo',
-    lastname: 'Ceiran',
-    age: 29,
-    role: 'office user',
-    email: 'name@email.com',
-    office: 'Cell',
-  },
-  {
-    id: 4,
-    avatar: 'avatar',
-    name: 'James',
-    lastname: 'Thumbiko',
-    age: 55,
-    role: 'office user',
-    email: 'name@email.com',
-    office: 'Cell',
-  },
-];
+import { useEffect, useState } from 'react';
+import { API } from '@/shared/api';
+import { getAgeFromBirthDate } from '@/shared/lib/utils';
+import { UserType } from '@/shared/types';
 
 // TODO: Добавить цвет для строк по опциям
+// TODO: Нужно добавить вывод роли (Жду от бэка)
+// TODO: Нужно добавить вывод аватара (Жду от бэка)
+// TODO: Нужно добавить выбор пользователя для редактирования
 export const DashboardTable = () => {
+  const [users, setUsers] = useState<UserType[]>([]);
+
+  useEffect(() => {
+    API.tableBlock.getUsers().then(({ data }) => setUsers(data));
+  }, []);
+
   return (
     <div className={styles.tableWrapper}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer sx={{ maxHeight: 315 }} component={Paper}>
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Lastname</TableCell>
               <TableCell>Age</TableCell>
-              <TableCell>User role</TableCell>
+              {/*<TableCell>User role</TableCell>*/}
               <TableCell>Email</TableCell>
               <TableCell>Office</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* TODO: Добавить подсветку строк */}
-            {rows.map((row) => (
+            {users.map((row) => (
               <TableRow key={row.id} onClick={() => console.log(row.id)}>
                 <TableCell>
-                  <p>{row.avatar}</p>
-                  {row.name}
+                  {/*<p>{row.avatar}</p>*/}
+                  {row.first_name}
                 </TableCell>
-                <TableCell>{row.lastname}</TableCell>
-                <TableCell>{row.age}</TableCell>
-                <TableCell>{row.role}</TableCell>
+                <TableCell>{row.last_name}</TableCell>
+                <TableCell>{getAgeFromBirthDate(row.birthdate)}</TableCell>
+                {/*<TableCell>{row.role}</TableCell>*/}
                 <TableCell>{row.email}</TableCell>
-                <TableCell>{row.office}</TableCell>
+                <TableCell>{row.office_id}</TableCell>
               </TableRow>
             ))}
           </TableBody>
