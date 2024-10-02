@@ -14,6 +14,16 @@ const authBlock = {
 
 const tableBlock = {
   getUsers: () => ApiInstance.get('/user'),
+  addUser: ({ email, first_name, last_name, office_id, birthdate, password, active }) =>
+    ApiInstance.post('/user/add', {
+      email: email,
+      first_name: first_name,
+      last_name: last_name,
+      office: office_id.toString(),
+      birthdate: birthdate,
+      password: password,
+      active: active,
+    }),
 };
 
 export const API = {

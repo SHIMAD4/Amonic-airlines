@@ -15,7 +15,6 @@ import { UserType } from '@/shared/types';
 
 // TODO: Добавить цвет для строк по опциям
 // TODO: Нужно добавить вывод роли (Жду от бэка)
-// TODO: Нужно добавить вывод аватара (Жду от бэка)
 // TODO: Нужно добавить выбор пользователя для редактирования
 export const DashboardTable = () => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -41,10 +40,7 @@ export const DashboardTable = () => {
           <TableBody>
             {users.map((row) => (
               <TableRow key={row.id} onClick={() => console.log(row.id)}>
-                <TableCell>
-                  {/*<p>{row.avatar}</p>*/}
-                  {row.first_name}
-                </TableCell>
+                <TableCell>{row.first_name}</TableCell>
                 <TableCell>{row.last_name}</TableCell>
                 <TableCell>{getAgeFromBirthDate(row.birthdate)}</TableCell>
                 {/*<TableCell>{row.role}</TableCell>*/}

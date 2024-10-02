@@ -1,27 +1,27 @@
 import { useForm } from '@/shared/lib/hook';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import styles from './styles.module.scss';
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { Input } from '@/shared/ui/molecules';
 import clsx from 'clsx';
+import { API } from '@/shared/api';
+import { getFormattedISODate } from '@/shared/lib/utils';
 
+// TODO: Привязать данные с запроса на получение офисов
 function AddUserPage() {
-  const [value, setValue] = useState(10);
-  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs('2022-04-17'));
+  const navigate = useNavigate();
+  const [value, setValue] = useState(1);
+  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs(getFormattedISODate(new Date())));
   const { formValues, formErrors, handleChange } = useForm({
     email: '',
-    firstname: '',
-    lastname: '',
-    office: '',
+    first_name: '',
+    last_name: '',
+    office_id: '',
     birthdate: '',
     password: '',
   });
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const fromPage = location.state?.from?.pathname || '/';
 
   const handleChangeSelect = (event) => {
     setValue(event.target.value);
@@ -30,25 +30,23 @@ function AddUserPage() {
 
   const handleDateChange = (newValue) => {
     setDateValue(newValue);
-    handleChange({ target: { name: 'birthdate', value: newValue?.toDate() } });
+    handleChange({ target: { name: 'birthdate', value: getFormattedISODate(newValue) } });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
+    API.tableBlock.addUser({
       email: formValues.email,
-      firstname: formValues.firstname,
-      lastname: formValues.lastname,
-      office: formValues.office,
+      first_name: formValues.firstname,
+      last_name: formValues.lastname,
+      office_id: formValues.office ?? value,
       birthdate: formValues.birthdate,
       password: formValues.password,
-    };
+      active: true,
+    });
 
-    // TODO: Добавлять в таблицу данные
-    console.log(data);
-
-    navigate(fromPage, { replace: true });
+    navigate('/home', { replace: true });
   };
 
   return (
@@ -77,6 +75,7 @@ function AddUserPage() {
           name="firstname"
           value={formValues.firstname}
           onChange={handleChange}
+          required={true}
         />
         <Input
           variant="TextInput"
@@ -87,6 +86,7 @@ function AddUserPage() {
           name="lastname"
           value={formValues.lastname}
           onChange={handleChange}
+          required={true}
         />
         <Input
           variant="SelectInput"
@@ -98,10 +98,13 @@ function AddUserPage() {
           name="office"
           value={value}
           onChange={handleChangeSelect}
+          required={true}
           arrOfItems={[
-            { id: 1, count: 10, text: 'All offices' },
-            { id: 2, count: 20, text: 'Cell' },
-            { id: 3, count: 30, text: 'Alabama' },
+            { id: 1, value: 'Abu dhabi' },
+            { id: 2, value: 'Bahrain' },
+            { id: 3, value: 'Cairo' },
+            { id: 4, value: 'Doha' },
+            { id: 5, value: 'Riyadh' },
           ]}
         />
         <Input
@@ -114,6 +117,7 @@ function AddUserPage() {
           name="birthdate"
           value={dateValue}
           onChange={handleDateChange}
+          required={true}
         />
         <Input
           variant="PasswordInput"
@@ -124,6 +128,7 @@ function AddUserPage() {
           name="password"
           value={formValues.password}
           onChange={handleChange}
+          required={true}
         />
         <div className={styles.buttonWrapper}>
           <Button

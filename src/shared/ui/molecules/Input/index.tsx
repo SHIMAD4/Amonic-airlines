@@ -58,7 +58,7 @@ const TextInput = ({
       variant="outlined"
       size="medium"
       name={name}
-      value={value}
+      value={value ?? ''}
       error={Boolean(error)}
       helperText={helperText}
       onChange={onChange}
@@ -131,8 +131,8 @@ const SelectInput = ({ name, value, fieldLabelText, onChange, arrOfItems, ...res
       <InputLabel id={name}>{fieldLabelText}</InputLabel>
       <Select labelId={name} name={name} value={value} onChange={onChange} label={fieldLabelText}>
         {arrOfItems.map((item) => (
-          <MenuItem key={item.id} value={item.count}>
-            {item.text}
+          <MenuItem key={item.id} value={item.value} disabled={item.id === 0}>
+            {item.value}
           </MenuItem>
         ))}
       </Select>

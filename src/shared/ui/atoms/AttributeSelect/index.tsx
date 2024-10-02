@@ -22,8 +22,11 @@ export const AttributeSelect = () => {
           onChange={handleChange}
         >
           <MenuItem value={10}>All offices</MenuItem>
-          <MenuItem value={20}>Cell</MenuItem>
-          <MenuItem value={30}>Alabama</MenuItem>
+          <MenuItem value="Abu dhabi">Abu dhabi</MenuItem>
+          <MenuItem value="Bahrain">Bahrain</MenuItem>
+          <MenuItem value="Cairo">Cairo</MenuItem>
+          <MenuItem value="Doha">Doha</MenuItem>
+          <MenuItem value="Riyadh">Riyadh</MenuItem>
         </Select>
       </FormControl>
     </div>

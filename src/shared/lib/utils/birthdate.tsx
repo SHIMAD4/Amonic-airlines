@@ -18,3 +18,7 @@ export const getAgeFromBirthDate = (birthDateString) => {
 
   return age;
 };
+
+export const getFormattedISODate = (dateString) => {
+  return new Date(dateString).toISOString().split('T')[0];
+};
