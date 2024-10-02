@@ -1,4 +1,4 @@
-import { AttributeSelect, DashboardTable } from '@/shared/atoms';
+import { AttributeSelect, DashboardTable } from '@/shared/ui/atoms';
 
 export const DashboardBody = () => {
   return (

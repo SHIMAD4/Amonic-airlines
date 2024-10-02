@@ -2,7 +2,7 @@ import { useForm } from '@/shared/lib/hook';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import { Input } from '@/shared/molecules';
+import { Input } from '@/shared/ui/molecules';
 import styles from './styles.module.scss';
 
 function EditUserPage() {

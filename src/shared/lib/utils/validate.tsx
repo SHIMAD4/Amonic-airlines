@@ -11,9 +11,11 @@ export const validateEmail = (email) => {
 export const validatePassword = (password) => {
   if (password.trim() === '') {
     return 'Пароль не может быть пустым';
-  } else if (password.length < 8) {
-    return 'Пароль должен содержать не менее 8 символов';
-  } else {
+  }
+  // else if (password.length < 8) {
+  //   return 'Пароль должен содержать не менее 8 символов';
+  // }
+  else {
     return '';
   }
 };

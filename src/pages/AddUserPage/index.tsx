@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import styles from './styles.module.scss';
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import { Input } from '@/shared/molecules';
+import { Input } from '@/shared/ui/molecules';
 import clsx from 'clsx';
 
 function AddUserPage() {

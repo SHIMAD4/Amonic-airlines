@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
-import { DashboardHeader, DashboardFooter } from '@/shared/atoms';
-import { DashboardBody } from '@/shared/molecules';
+import { DashboardHeader, DashboardFooter } from '@/shared/ui/atoms';
+import { DashboardBody } from '@/shared/ui/molecules';
 
 function AdminDashboard() {
   return (

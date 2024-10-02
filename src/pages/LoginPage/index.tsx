@@ -3,7 +3,7 @@ import { useAuth } from '@/shared/lib/hook/useAuth.tsx';
 import styles from './styles.module.scss';
 import { Button } from '@mui/material';
 import { useForm } from '@/shared/lib/hook';
-import { Input } from '@/shared/molecules';
+import { Input } from '@/shared/ui/molecules';
 
 const LoginPage = () => {
   const { formValues, formErrors, handleChange, validate } = useForm({
