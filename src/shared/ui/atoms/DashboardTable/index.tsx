@@ -8,20 +8,18 @@ import {
   TableRow,
 } from '@mui/material';
 import styles from './styles.module.scss';
-import { useEffect, useState } from 'react';
-import { API } from '@/shared/api';
 import { getAgeFromBirthDate } from '@/shared/lib/utils';
-import { UserType } from '@/shared/types';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
+import { handleRowClick } from '@/shared/lib/slices/tableSlice.tsx';
+import { handleFilterUsersById } from '@/shared/lib/slices/userSlice.tsx';
+import { useEffect } from 'react';
 
-// TODO: Добавить цвет для строк по опциям
+// TODO: Добавить цвет для строк по активный/неактивный
 // TODO: Нужно добавить вывод роли (Жду от бэка)
-// TODO: Нужно добавить выбор пользователя для редактирования
 export const DashboardTable = () => {
-  const [users, setUsers] = useState<UserType[]>([]);
-
-  useEffect(() => {
-    API.userBlock.getUsers().then(({ data }) => setUsers(data));
-  }, []);
+  const dispatch = useAppDispatch();
+  const { selectedUserId } = useAppSelector((state) => state.tableSlice);
+  const { users, filteredUsers } = useAppSelector((state) => state.userSlice);
 
   return (
     <div className={styles.tableWrapper}>
@@ -38,8 +36,15 @@ export const DashboardTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((row) => (
-              <TableRow key={row.id} onClick={() => console.log(row.id)}>
+            {filteredUsers.map((row) => (
+              <TableRow
+                key={row.id}
+                className={selectedUserId === row.id ? styles.selectedRow : null}
+                onClick={() => {
+                  dispatch(handleRowClick({ id: row.id }));
+                  dispatch(handleFilterUsersById({ users: users, selectedId: row.id }));
+                }}
+              >
                 <TableCell>{row.first_name}</TableCell>
                 <TableCell>{row.last_name}</TableCell>
                 <TableCell>{getAgeFromBirthDate(row.birthdate)}</TableCell>

@@ -1,4 +1,4 @@
-import { useForm } from '@/shared/lib/hook';
+import { useForm } from '@/shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import styles from './styles.module.scss';
@@ -8,9 +8,8 @@ import { Input } from '@/shared/ui/molecules';
 import clsx from 'clsx';
 import { API } from '@/shared/api';
 import { getFormattedISODate } from '@/shared/lib/utils';
-import { OfficeType } from '@/shared/types';
+import { OfficeType } from '@/shared/lib/types';
 
-// TODO: Исправить рендер новых пользователей в таблице (Может быть добавить Redux Toolkit)
 function AddUserPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
@@ -45,7 +44,9 @@ function AddUserPage() {
       active: true,
     });
 
-    navigate('/home');
+    setTimeout(() => {
+      navigate('/home');
+    }, 100);
   };
 
   useEffect(() => {

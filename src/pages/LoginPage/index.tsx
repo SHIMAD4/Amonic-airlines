@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/shared/lib/hook/useAuth.tsx';
+import { useAuth } from '@/shared/lib/hooks/useAuth.tsx';
 import styles from './styles.module.scss';
 import { Button } from '@mui/material';
-import { useForm } from '@/shared/lib/hook';
+import { useForm } from '@/shared/lib/hooks';
 import { Input } from '@/shared/ui/molecules';
 
 const LoginPage = () => {

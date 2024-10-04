@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/shared/lib/hook';
+import { useAuth } from '@/shared/lib/hooks';
 
 export const DashboardHeader = () => {
   const navigate = useNavigate();

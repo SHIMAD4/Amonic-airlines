@@ -1,34 +1,30 @@
-import { useForm } from '@/shared/lib/hook';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppSelector, useForm } from '@/shared/lib/hooks';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from '@/shared/ui/molecules';
 import styles from './styles.module.scss';
+import { OfficeType } from '@/shared/lib/types';
+import { API } from '@/shared/api';
 
+// TODO: Добавить роли
 function EditUserPage() {
-  const [selectValue, setSelectValue] = useState(10);
-  const [selectRadio, setRadioValue] = useState(10);
-  const { formValues, formErrors, handleChange } = useForm({
-    email: '',
-    firstname: '',
-    lastname: '',
-    office: '',
-    role: '',
-  });
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const fromPage = location.state?.from?.pathname || '/';
+  const [selectValue, setSelectValue] = useState('');
+  // const [selectRadio, setRadioValue] = useState('');
+  const { selectedUser } = useAppSelector((state) => state.userSlice);
+  const [offices, setOffices] = useState<OfficeType[]>([]);
+  const { formValues, formErrors, handleChange } = useForm({ ...selectedUser });
 
   const handleChangeSelect = (event) => {
     setSelectValue(event.target.value);
     handleChange({ target: { name: 'office', value: +event.target.value } });
   };
 
-  const handleChangeRadio = (event) => {
-    setRadioValue(event.target.value);
-    handleChange({ target: { name: 'role', value: +event.target.value } });
-  };
+  // const handleChangeRadio = (event) => {
+  //   setRadioValue(event.target.value);
+  //   handleChange({ target: { name: 'role', value: +event.target.value } });
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,12 +40,17 @@ function EditUserPage() {
     // TODO: Добавлять в таблицу данные
     console.log(data);
 
-    navigate(fromPage, { replace: true });
+    navigate('/home', { replace: true });
   };
+
+  useEffect(() => {
+    API.userBlock.getOffices().then(({ data }) => setOffices(data));
+    setSelectValue(selectedUser.office_id);
+  }, []);
 
   return (
     <div className={styles.formWrapper}>
-      <h1 className={styles.heading}>Add user</h1>
+      <h1 className={styles.heading}>Edit user</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           variant="TextInput"
@@ -71,7 +72,7 @@ function EditUserPage() {
           leftLabelText="First name"
           labelClassName={styles.label}
           name="firstname"
-          value={formValues.firstname}
+          value={formValues.first_name}
           onChange={handleChange}
         />
         <Input
@@ -81,7 +82,7 @@ function EditUserPage() {
           leftLabelText="Last name"
           labelClassName={styles.label}
           name="lastname"
-          value={formValues.lastname}
+          value={formValues.last_name}
           onChange={handleChange}
         />
         <Input
@@ -94,26 +95,22 @@ function EditUserPage() {
           name="office"
           value={selectValue}
           onChange={handleChangeSelect}
-          arrOfItems={[
-            { id: 1, count: 10, text: 'All offices' },
-            { id: 2, count: 20, text: 'Cell' },
-            { id: 3, count: 30, text: 'Alabama' },
-          ]}
+          arrOfItems={offices}
         />
-        <Input
-          variant="RadioInput"
-          wrapperClassName={styles.labelWrapper}
-          fieldLabelText="Role"
-          labelClassName={styles.label}
-          radioGroupClassName={styles.radioGroup}
-          name="role"
-          value={selectRadio}
-          onChange={handleChangeRadio}
-          arrOfItems={[
-            { id: 1, value: 10, label: 'User' },
-            { id: 2, value: 20, label: 'Administrator' },
-          ]}
-        />
+        {/*<Input*/}
+        {/*  variant="RadioInput"*/}
+        {/*  wrapperClassName={styles.labelWrapper}*/}
+        {/*  fieldLabelText="Role"*/}
+        {/*  labelClassName={styles.label}*/}
+        {/*  radioGroupClassName={styles.radioGroup}*/}
+        {/*  name="role"*/}
+        {/*  value={selectRadio}*/}
+        {/*  onChange={handleChangeRadio}*/}
+        {/*  arrOfItems={[*/}
+        {/*    { id: 1, value: 10, label: 'User' },*/}
+        {/*    { id: 2, value: 20, label: 'Administrator' },*/}
+        {/*  ]}*/}
+        {/*/>*/}
         <div className={styles.buttonWrapper}>
           <Button
             className={styles.buttonApply}
