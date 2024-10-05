@@ -21,6 +21,14 @@ const userBlock = {
       password: password,
       active: active,
     }),
+  editUser: ({ email, first_name, last_name, office_id, role }) =>
+    ApiInstance.post('/user/edit', {
+      email: email,
+      first_name: first_name,
+      last_name: last_name,
+      office: office_id,
+      role: role,
+    }),
   getOffices: () => ApiInstance.get('/offices'),
 };
 

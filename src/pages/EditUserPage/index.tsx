@@ -10,42 +10,43 @@ import { API } from '@/shared/api';
 // TODO: Добавить роли
 function EditUserPage() {
   const navigate = useNavigate();
-  const [selectValue, setSelectValue] = useState('');
-  // const [selectRadio, setRadioValue] = useState('');
   const { selectedUser } = useAppSelector((state) => state.userSlice);
   const [offices, setOffices] = useState<OfficeType[]>([]);
-  const { formValues, formErrors, handleChange } = useForm({ ...selectedUser });
+  const [formState, setFormState] = useState({
+    first_name: selectedUser.first_name,
+    last_name: selectedUser.last_name,
+    email: selectedUser.email,
+    office: selectedUser.office_id || '',
+    role: selectedUser.role_id === 1 ? 'Administrator' : 'User',
+  });
+  const { formErrors } = useForm(formState);
 
-  const handleChangeSelect = (event) => {
-    setSelectValue(event.target.value);
-    handleChange({ target: { name: 'office', value: +event.target.value } });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-
-  // const handleChangeRadio = (event) => {
-  //   setRadioValue(event.target.value);
-  //   handleChange({ target: { name: 'role', value: +event.target.value } });
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
-      email: formValues.email,
-      firstname: formValues.firstname,
-      lastname: formValues.lastname,
-      office: formValues.office,
-      role: formValues.role,
-    };
+    API.userBlock.editUser({
+      email: formState.email,
+      first_name: formState.first_name,
+      last_name: formState.last_name,
+      office_id: formState.office,
+      role: formState.role,
+    });
 
-    // TODO: Добавлять в таблицу данные
-    console.log(data);
-
-    navigate('/home', { replace: true });
+    setTimeout(() => {
+      navigate('/home', { replace: true });
+    }, 200);
   };
 
   useEffect(() => {
     API.userBlock.getOffices().then(({ data }) => setOffices(data));
-    setSelectValue(selectedUser.office_id);
   }, []);
 
   return (
@@ -59,10 +60,10 @@ function EditUserPage() {
           leftLabelText="Email address"
           labelClassName={styles.label}
           name="email"
-          value={formValues.email}
+          value={formState.email}
           error={formErrors.email}
           helperText={formErrors.email}
-          onChange={handleChange}
+          onChange={handleInputChange}
           required={true}
         />
         <Input
@@ -71,9 +72,9 @@ function EditUserPage() {
           fieldLabelText="First name"
           leftLabelText="First name"
           labelClassName={styles.label}
-          name="firstname"
-          value={formValues.first_name}
-          onChange={handleChange}
+          name="first_name"
+          value={formState.first_name}
+          onChange={handleInputChange}
         />
         <Input
           variant="TextInput"
@@ -81,9 +82,9 @@ function EditUserPage() {
           fieldLabelText="Last name"
           leftLabelText="Last name"
           labelClassName={styles.label}
-          name="lastname"
-          value={formValues.last_name}
-          onChange={handleChange}
+          name="last_name"
+          value={formState.last_name}
+          onChange={handleInputChange}
         />
         <Input
           variant="SelectInput"
@@ -93,24 +94,24 @@ function EditUserPage() {
           leftLabelText="Office"
           labelClassName={styles.label}
           name="office"
-          value={selectValue}
-          onChange={handleChangeSelect}
+          value={formState.office}
+          onChange={handleInputChange}
           arrOfItems={offices}
         />
-        {/*<Input*/}
-        {/*  variant="RadioInput"*/}
-        {/*  wrapperClassName={styles.labelWrapper}*/}
-        {/*  fieldLabelText="Role"*/}
-        {/*  labelClassName={styles.label}*/}
-        {/*  radioGroupClassName={styles.radioGroup}*/}
-        {/*  name="role"*/}
-        {/*  value={selectRadio}*/}
-        {/*  onChange={handleChangeRadio}*/}
-        {/*  arrOfItems={[*/}
-        {/*    { id: 1, value: 10, label: 'User' },*/}
-        {/*    { id: 2, value: 20, label: 'Administrator' },*/}
-        {/*  ]}*/}
-        {/*/>*/}
+        <Input
+          variant="RadioInput"
+          wrapperClassName={styles.labelWrapper}
+          fieldLabelText="Role"
+          labelClassName={styles.label}
+          radioGroupClassName={styles.radioGroup}
+          name="role"
+          value={formState.role}
+          onChange={handleInputChange}
+          arrOfItems={[
+            { id: 1, value: 'Administrator', label: 'Administrator' },
+            { id: 2, value: 'User', label: 'User' },
+          ]}
+        />
         <div className={styles.buttonWrapper}>
           <Button
             className={styles.buttonApply}
