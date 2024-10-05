@@ -12,9 +12,9 @@ import { getAgeFromBirthDate } from '@/shared/lib/utils';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { handleRowClick } from '@/shared/lib/slices/tableSlice.tsx';
 import { handleFilterUsersById } from '@/shared/lib/slices/userSlice.tsx';
+import { RoleTag } from '@/shared/ui/atoms';
 
 // TODO: Добавить цвет для строк по активный/неактивный
-// TODO: Нужно добавить вывод роли (Жду от бэка)
 export const DashboardTable = () => {
   const dispatch = useAppDispatch();
   const { selectedUserId } = useAppSelector((state) => state.tableSlice);
@@ -29,7 +29,7 @@ export const DashboardTable = () => {
               <TableCell>Name</TableCell>
               <TableCell>Lastname</TableCell>
               <TableCell>Age</TableCell>
-              {/*<TableCell>User role</TableCell>*/}
+              <TableCell>User role</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Office</TableCell>
             </TableRow>
@@ -47,7 +47,9 @@ export const DashboardTable = () => {
                 <TableCell>{row.first_name}</TableCell>
                 <TableCell>{row.last_name}</TableCell>
                 <TableCell>{getAgeFromBirthDate(row.birthdate)}</TableCell>
-                {/*<TableCell>{row.role}</TableCell>*/}
+                <TableCell>
+                  <RoleTag roleId={row.role_id} />
+                </TableCell>
                 <TableCell>{row.email}</TableCell>
                 <TableCell>{row.office_id}</TableCell>
               </TableRow>
