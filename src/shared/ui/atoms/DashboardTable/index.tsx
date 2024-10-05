@@ -12,7 +12,6 @@ import { getAgeFromBirthDate } from '@/shared/lib/utils';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { handleRowClick } from '@/shared/lib/slices/tableSlice.tsx';
 import { handleFilterUsersById } from '@/shared/lib/slices/userSlice.tsx';
-import { useEffect } from 'react';
 
 // TODO: Добавить цвет для строк по активный/неактивный
 // TODO: Нужно добавить вывод роли (Жду от бэка)
