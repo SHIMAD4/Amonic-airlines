@@ -46,7 +46,7 @@ function AddUserPage() {
 
     setTimeout(() => {
       navigate('/home');
-    }, 100);
+    }, 250);
   };
 
   useEffect(() => {

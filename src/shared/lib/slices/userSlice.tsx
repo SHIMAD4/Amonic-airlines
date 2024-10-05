@@ -18,6 +18,9 @@ const userSlice = createSlice({
       const { users, selectedId } = payload;
       state.selectedUser = filterUsersById(users, selectedId);
     },
+    handleClearSelectedUser(state) {
+      state.selectedUser = {};
+    },
     handleFilterUsersByOffice(state, { payload }) {
       const { users, selectedOffice } = payload;
       state.filteredUsers = filterUsersByOffice(users, selectedOffice);
@@ -25,6 +28,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { handleSaveUsers, handleFilterUsersById, handleFilterUsersByOffice } =
-  userSlice.actions;
+export const {
+  handleSaveUsers,
+  handleFilterUsersById,
+  handleClearSelectedUser,
+  handleFilterUsersByOffice,
+} = userSlice.actions;
 export default userSlice.reducer;

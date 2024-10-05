@@ -5,10 +5,14 @@ export const ApiInstance = axios.create({
 });
 
 const userBlock = {
-  getToken: (email, password) =>
+  userLogin: (email, password) =>
     ApiInstance.post('/login', {
       email: email,
       password: password,
+    }),
+  userLogout: (id) =>
+    ApiInstance.post('/logout', {
+      id: id,
     }),
   getUsers: () => ApiInstance.get('/user'),
   addUser: ({ email, first_name, last_name, office_id, birthdate, password, active }) =>

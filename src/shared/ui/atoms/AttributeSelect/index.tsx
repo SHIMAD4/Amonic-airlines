@@ -34,7 +34,9 @@ export const AttributeSelect = () => {
         >
           <MenuItem value="All">All offices</MenuItem>
           {offices.map((office) => (
-            <MenuItem value={office.title}>{office.title}</MenuItem>
+            <MenuItem key={office.id} value={office.title}>
+              {office.title}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

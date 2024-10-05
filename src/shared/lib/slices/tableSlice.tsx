@@ -11,8 +11,11 @@ const tableSlice = createSlice({
 
       state.selectedUserId = id;
     },
+    handleClearSelectedUserId(state) {
+      state.selectedUserId = 0;
+    },
   },
 });
 
-export const { handleRowClick } = tableSlice.actions;
+export const { handleRowClick, handleClearSelectedUserId } = tableSlice.actions;
 export default tableSlice.reducer;

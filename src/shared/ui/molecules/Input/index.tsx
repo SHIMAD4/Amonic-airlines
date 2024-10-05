@@ -131,7 +131,7 @@ const SelectInput = ({ name, value, fieldLabelText, onChange, arrOfItems, ...res
       <InputLabel id={name}>{fieldLabelText}</InputLabel>
       <Select labelId={name} name={name} value={value} onChange={onChange} label={fieldLabelText}>
         {arrOfItems.map((item) => (
-          <MenuItem key={item.id} value={item.title}>
+          <MenuItem key={item.id} value={item.value}>
             {item.title}
           </MenuItem>
         ))}
@@ -158,11 +158,16 @@ const RadioInput = ({
       className={radioGroupClassName}
       aria-labelledby={name}
       name={name}
-      defaultChecked={value}
       onChange={onChange}
     >
       {arrOfItems.map((item) => (
-        <FormControlLabel key={item.id} value={item.value} label={item.label} control={<Radio />} />
+        <FormControlLabel
+          key={item.id}
+          value={item.value}
+          label={item.label}
+          checked={item.value === value}
+          control={<Radio />}
+        />
       ))}
     </RadioGroup>
   </InputWrapper>
