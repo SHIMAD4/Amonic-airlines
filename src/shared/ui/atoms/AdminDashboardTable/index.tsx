@@ -15,7 +15,7 @@ import { handleFilterUsersById } from '@/shared/lib/slices/userSlice.tsx';
 import { RoleTag } from '@/shared/ui/atoms';
 
 // TODO: Добавить цвет для строк по активный/неактивный
-export const DashboardTable = () => {
+export const AdminDashboardTable = () => {
   const dispatch = useAppDispatch();
   const { selectedUserId } = useAppSelector((state) => state.tableSlice);
   const { users, filteredUsers } = useAppSelector((state) => state.userSlice);

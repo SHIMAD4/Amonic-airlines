@@ -8,7 +8,7 @@ import { Input } from '@/shared/ui/molecules';
 import clsx from 'clsx';
 import { API } from '@/shared/api';
 import { getFormattedISODate } from '@/shared/lib/utils';
-import { OfficeType } from '@/shared/lib/types';
+import { OfficeType } from '@/shared/lib/types/user.tsx';
 
 function AddUserPage() {
   const navigate = useNavigate();

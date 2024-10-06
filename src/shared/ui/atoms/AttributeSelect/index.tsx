@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styles from './styles.module.scss';
 import { API } from '@/shared/api';
-import { OfficeType } from '@/shared/lib/types';
+import { OfficeType } from '@/shared/lib/types/user.tsx';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { handleFilterUsersByOffice } from '@/shared/lib/slices/userSlice.tsx';
 

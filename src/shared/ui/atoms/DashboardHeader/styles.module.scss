@@ -8,11 +8,29 @@
   .heading {
     font-size: 24px;
     font-weight: 400;
+
     margin-bottom: 11px;
   }
 
   .buttonWrapper {
     display: flex;
     gap: 25px;
+  }
+
+  .greeting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 16px;
+
+    padding-top: 16px;
+    padding-right: 138px;
+    padding-bottom: 5px;
+    padding-left: 138px;
+
+    p {
+      font-size: 14px;
+    }
   }
 }

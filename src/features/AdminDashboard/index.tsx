@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { DashboardHeader, DashboardFooter } from '@/shared/ui/atoms';
-import { DashboardBody } from '@/shared/ui/molecules';
+import { AdminDashboardBody } from '@/shared/ui/molecules';
 import { useAppDispatch } from '@/shared/lib/hooks';
 import { API } from '@/shared/api';
 import { handleSaveUsers } from '@/shared/lib/slices/userSlice.tsx';
@@ -18,7 +18,7 @@ function AdminDashboard() {
   return (
     <div className={styles.wrapper}>
       <DashboardHeader />
-      <DashboardBody />
+      <AdminDashboardBody />
       <DashboardFooter />
     </div>
   );

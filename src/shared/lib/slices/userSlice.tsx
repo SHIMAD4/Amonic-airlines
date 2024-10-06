@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { filterUsersById, filterUsersByOffice } from '@/shared/lib/utils';
+import { UsersRoles } from '@/shared/lib/types/user.tsx';
 
 const userSlice = createSlice({
   name: 'userTitle',
@@ -7,6 +8,8 @@ const userSlice = createSlice({
     users: [],
     filteredUsers: [],
     selectedUser: {},
+    // TODO: Изменить в соответствии возвращаемой роли при логине
+    userRole: UsersRoles.ADMIN,
   },
   reducers: {
     handleSaveUsers(state, { payload }) {

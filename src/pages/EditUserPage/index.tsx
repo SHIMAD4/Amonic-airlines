@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Input } from '@/shared/ui/molecules';
 import styles from './styles.module.scss';
-import { OfficeType } from '@/shared/lib/types';
+import { OfficeType, UsersRoles } from '@/shared/lib/types/user.tsx';
 import { API } from '@/shared/api';
 import { handleClearSelectedUserId } from '@/shared/lib/slices/tableSlice.tsx';
 import { handleClearSelectedUser } from '@/shared/lib/slices/userSlice.tsx';
@@ -19,11 +19,11 @@ function EditUserPage() {
     last_name: selectedUser.last_name,
     email: selectedUser.email,
     office: selectedUser.office_id || '',
-    role: selectedUser.role_id === 1 ? 'Administrator' : 'User',
+    role: selectedUser.role_id === 1 ? UsersRoles.ADMIN : UsersRoles.USER,
   });
   const usersRoles = [
-    { id: 1, value: 'Administrator', label: 'Administrator' },
-    { id: 2, value: 'User', label: 'User' },
+    { id: 1, value: UsersRoles.ADMIN, label: UsersRoles.ADMIN },
+    { id: 2, value: UsersRoles.USER, label: UsersRoles.USER },
   ];
 
   const { formErrors } = useForm(formState);
@@ -70,7 +70,7 @@ function EditUserPage() {
       last_name: selectedUser.last_name || '',
       email: selectedUser.email || '',
       office: selectedUser.office_id || '',
-      role: selectedUser.role_id === 1 ? 'Administrator' : 'User',
+      role: selectedUser.role_id === 1 ? UsersRoles.ADMIN : UsersRoles.USER,
     });
   }, []);
 

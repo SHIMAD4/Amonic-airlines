@@ -15,3 +15,8 @@ export type OfficeType = {
   phone: string;
   title: string;
 };
+
+export enum UsersRoles {
+  ADMIN = 'Administrator',
+  USER = 'User',
+}
