@@ -35,9 +35,13 @@ export const Input = ({ variant = 'TextInput', ...rest }) => {
   }
 };
 
-const InputWrapper = ({ leftLabelText, labelClassName, wrapperClassName, children }) => (
+const InputWrapper = ({ leftLabelText, labelClassName, wrapperClassName, name, children }) => (
   <div className={wrapperClassName}>
-    {leftLabelText && <FormLabel className={labelClassName}>{leftLabelText}</FormLabel>}
+    {leftLabelText && (
+      <FormLabel htmlFor={name} className={labelClassName}>
+        {leftLabelText}
+      </FormLabel>
+    )}
     {children}
   </div>
 );
@@ -52,11 +56,12 @@ const TextInput = ({
   className,
   ...rest
 }) => (
-  <InputWrapper {...rest}>
+  <InputWrapper {...rest} name={name}>
     <TextField
       label={fieldLabelText}
       variant="outlined"
       size="medium"
+      id={name}
       name={name}
       value={value ?? ''}
       error={Boolean(error)}
@@ -64,6 +69,7 @@ const TextInput = ({
       onChange={onChange}
       className={className}
       fullWidth
+      autoComplete={name}
     />
   </InputWrapper>
 );

@@ -74,6 +74,11 @@ function EditUserPage() {
     });
   }, []);
 
+  // HINT: Защита от нулевого значения input с типом Select
+  if (offices.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.formWrapper}>
       <h1 className={styles.heading}>Edit user</h1>
